@@ -11,7 +11,7 @@ export default function TextForm(props) {
         setText(newText);
     }
 
-    const handleLoClick = ()=>{
+    const handleLoClick = () => {
         let newText = text.toLowerCase();
         setText(newText);
     }
@@ -24,16 +24,16 @@ export default function TextForm(props) {
         <>
             <div className="container mb-3">
                 <h1>{props.heading}</h1>
-                <textarea className="form-control mb-3" value={text} id="textForm" rows="8" onChange={handleOnChange} placeholder='Enter text here'></textarea>
+                <textarea className="form-control mb-3" style={props.mode === 'light' ? { background: 'white' } : { background: 'grey' }} value={text} id="textForm" rows="8" onChange={handleOnChange} placeholder='Enter text here'></textarea>
                 <button className="btn btn-primary mx-3" onClick={handleUpClick} >Convert to upperCase</button>
                 <button className="btn btn-primary mx-3" onClick={handleLoClick} >Convert to lowerCase</button>
             </div>
             <div className="container mb-3">
-            <h2>Content Discription</h2>
-            <p>Word Count - {text.split(" ").length}</p>
-            <p>Characters - {text.length}</p>
-            <h2>Preview</h2>
-            <p>{text}</p>
+                <h2>Content Discription</h2>
+                <p>Word Count - {text.split(" ").length}</p>
+                <p>Characters - {text.length}</p>
+                <h2>Preview</h2>
+                <p>{text}</p>
             </div>
         </>
     )

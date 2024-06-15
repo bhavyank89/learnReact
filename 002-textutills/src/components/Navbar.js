@@ -1,22 +1,23 @@
-import React from 'react'
-import propTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function Navbar(props) {
     return (
         <>
             <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="/">{props.navTitle}</a>
+                    <Link to="/" className="navbar-brand">{props.navTitle}</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">{props.homeTilte}</a>
+                                <Link to="/" className="nav-link active" aria-current="page">{props.homeTitle}</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">{props.aboutTitle}</a>
+                                <Link to="/about" className="nav-link">{props.aboutTitle}</Link>
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
@@ -25,25 +26,27 @@ export default function Navbar(props) {
                         </form>
                         <div className={`form-check form-switch mx-3 text-${props.mode === 'light' ? 'dark' : 'light'}`}>
                             <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{`${props.mode === 'light' ? 'Enable darkMdoe' : 'enable lightMode'}`}</label>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{`${props.mode === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}`}</label>
                         </div>
                     </div>
                 </div>
             </nav>
         </>
-    )
+    );
 }
 
 Navbar.propTypes = {
-    navTitle: propTypes.string.isRequired,
-    homeTilte: propTypes.string.isRequired,
-    aboutTitle: propTypes.string.isRequired,
-    searchTitle: propTypes.string.isRequired
-}
+    navTitle: PropTypes.string.isRequired,
+    homeTitle: PropTypes.string.isRequired,
+    aboutTitle: PropTypes.string.isRequired,
+    searchTitle: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired,
+    toggleMode: PropTypes.func.isRequired,
+};
 
 Navbar.defaultProps = {
-    navTitle: "set title here",
-    homeTilte: "homeTitle here",
-    aboutTitle: "aboutTitle here",
-    searchTitle: "searchTitle here"
-}
+    navTitle: "Set title here",
+    homeTitle: "Home title here",
+    aboutTitle: "About title here",
+    searchTitle: "Search title here",
+};

@@ -1,12 +1,12 @@
 import './App.css';
 import React, { Component } from 'react'
+import Navbar from './components/Navbar'
 
 export default class App extends Component {
-  a = 'John';
   render() {
     return (
       <div>
-        Hello This is made form class based components - {this.a}
+        <Navbar/>
       </div>
     )
   }

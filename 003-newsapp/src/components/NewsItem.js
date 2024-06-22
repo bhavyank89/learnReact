@@ -10,7 +10,7 @@ export default class NewsItem extends Component {
                     <div className="card-body">
                         <h5 className="card-title">{title} ...<span style={{ fontSize: "15px", fontWeight: "500" }}>read More</span></h5>
                         <p className="card-text">{description} ...<span style={{ fontSize: "15px", fontWeight: "500" }}>read More</span></p>
-                        <a href={newsUrl} target='_blank' className="btn btn-sm btn-primary">Read More</a>
+                        <a href={newsUrl} target='_blank' className="btn btn-sm btn-dark">Read More</a>
                     </div>
                 </div>
             </div>

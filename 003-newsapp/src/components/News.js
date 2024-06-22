@@ -4,20 +4,33 @@ import NewsItem from "./NewsItem";
 export default class News extends Component {
     constructor() {
         super();
-        console.log("Inside constructor of News.js file");
         this.state = {
             articles: [],
             loading: false,
-            page: 1
+            currentPage: 1,
+            nextPage: 2,
+            totalPage: 0
         }
     }
 
     async componentDidMount() {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=13ea8cd3e420423b9bad251fbca94214`;
+        let url = `https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage}`;
         let data = await fetch(url);
         let parsedData = await data.json();
-        console.log(parsedData);
-        this.setState({ articles: parsedData.articles });
+        this.setState({ articles: parsedData.articles, totalPage: Math.ceil(parsedData.totalResults / parsedData.articles.length) });
+    }
+
+    handleNextonClick = async () => {
+        let url = `https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage + 1}`;
+        let data = await fetch(url);
+        let parsedData = await data.json();
+        this.setState({ articles: parsedData.articles, currentPage: this.state.currentPage + 1, nextPage: this.state.currentPage + 1 });
+    }
+    handlePrevonClick = async () => {
+        let url = `https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage - 1}`;
+        let data = await fetch(url);
+        let parsedData = await data.json();
+        this.setState({ articles: parsedData.articles, currentPage: this.state.currentPage - 1, nextPage: this.state.currentPage + 1 });
     }
 
     render() {
@@ -31,6 +44,10 @@ export default class News extends Component {
                                 <NewsItem title={element ? element.title : " "} description={element ? element.description : " "} imgSrc={element.urlToImage} newsUrl={element.url} />
                             </div>
                         })}
+                    </div>
+                    <div className="container d-flex justify-content-between">
+                        <button onClick={this.handlePrevonClick} disabled={this.state.currentPage <= 1} className="btn btn-dark mx-3">&larr; Previous</button>
+                        <button onClick={this.handleNextonClick} disabled={this.state.currentPage === this.state.totalPage} className="btn btn-dark mx-3">Next &rarr;</button>
                     </div>
                 </div>
             </>

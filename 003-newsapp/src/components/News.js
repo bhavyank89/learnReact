@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./spinner";
+import propTypes from "prop-types"
 
 export default class News extends Component {
+
+    static defaultProps = {
+        country: "in",
+        catogary: "general",
+        pageSize: 3
+    }
+    static propTypes = {
+        country: propTypes.string,
+        catogary: propTypes.string,
+        pageSize: propTypes.number,
+    }
+
     constructor() {
         super();
         this.state = {
@@ -15,7 +28,7 @@ export default class News extends Component {
     }
 
     async componentDidMount() {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catogary}&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
@@ -23,14 +36,14 @@ export default class News extends Component {
     }
 
     handleNextonClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage + 1}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catogary}&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage + 1}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({ articles: parsedData.articles, currentPage: this.state.currentPage + 1, nextPage: this.state.currentPage + 1, loading: false });
     }
     handlePrevonClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage - 1}&pageSize=${this.props.pageSize}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catogary}&apiKey=13ea8cd3e420423b9bad251fbca94214&page=${this.state.currentPage - 1}&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         let data = await fetch(url);
         let parsedData = await data.json();

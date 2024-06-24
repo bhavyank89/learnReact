@@ -16,8 +16,8 @@ export default class News extends Component {
         pageSize: propTypes.number,
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             articles: [],
             loading: false,
@@ -25,6 +25,7 @@ export default class News extends Component {
             nextPage: 2,
             totalPage: 0
         }
+        document.title = `${this.props.catogary} - newsMonkey`;
     }
 
     async componentDidMount() {

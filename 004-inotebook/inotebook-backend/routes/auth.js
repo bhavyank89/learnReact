@@ -7,11 +7,14 @@ const router = express.Router();
 // Middleware to parse JSON bodies
 router.use(express.json());
 
-router.post('/', [
+router.post('/createuser', [
+    // Validation
     body('name', 'Enter a valid name').isLength({ min: 3 }),
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Password must be at least 5 characters long').isLength({ min: 5 }),
 ], async (req, res) => {
+
+    // Check for error in validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });

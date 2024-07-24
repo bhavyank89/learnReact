@@ -23,14 +23,18 @@ router.post('/createuser', [
     }
 
     try {
+        // Encrypting password using salt and hash
         const salt = await bcrypt.genSalt(10);
         const secPass = await bcrypt.hash(req.body.password, salt);
+
+        // creating user
         const user = await User.create({
             name: req.body.name,
             email: req.body.email,
             password: secPass
         });
 
+        // creating JWT Tokens
         const userId = {
             user: {
                 id: user.id
@@ -38,9 +42,12 @@ router.post('/createuser', [
         }
         const JWT_Signature = "inotebookisagre@t"
         const JWTToken = jwt.sign(userId, JWT_Signature);
+
+        // sending JWT Token
         res.json({ JWTToken });
 
     } catch (error) {
+        // Check for error such as if user Email already exists or not
         res.status(500).send({ error: error.message });
     }
 });

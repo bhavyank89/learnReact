@@ -3,6 +3,7 @@ import { body, validationResult } from 'express-validator';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import fetchuser from '../middleware/fetchuser.js';
 
 const router = express.Router();
 
@@ -97,6 +98,20 @@ router.post('/login', [
 
     } catch (e) {
         res.status(500).send({ error: e.message });
+    }
+
+})
+
+
+// ROUTE 3 : get user data from /auth/getuser (Login Required)
+router.post('/getuser', fetchuser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findById(userId).select("-password");
+        res.send(user);
+
+    } catch (error) {
+        res.status(500).send({ error: error.message });
     }
 
 })

@@ -2,6 +2,7 @@ import express from 'express';
 import { body, validationResult } from 'express-validator';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -29,7 +30,16 @@ router.post('/createuser', [
             email: req.body.email,
             password: secPass
         });
-        res.json(user);
+
+        const userId = {
+            user: {
+                id: user.id
+            }
+        }
+        const JWT_Signature = "inotebookisagre@t"
+        const JWTToken = jwt.sign(userId, JWT_Signature);
+        res.json({ JWTToken });
+
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

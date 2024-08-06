@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 
 const notesSchema = new mongoose.Schema({
+    // Linking this Notes model with User model
+    // Similar to foreign key in SQL
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
     title: {
         type: String,
         required: true
@@ -11,7 +17,7 @@ const notesSchema = new mongoose.Schema({
     },
     tag: {
         type: String,
-        default: general
+        default: "general"
     },
     timeStamp: {
         type: Date,

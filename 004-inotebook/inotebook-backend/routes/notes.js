@@ -48,7 +48,7 @@ router.post('/create', fetchuser, [
     }
 })
 
-// ROUTE 3 : updating a note of a user GET : /notes/update/:id ( Login Required )
+// ROUTE 3 : updating a note of a user PUT : /notes/update/:id ( Login Required )
 router.put('/update/:id', fetchuser, async (req, res) => {
     try {
 
@@ -67,6 +67,22 @@ router.put('/update/:id', fetchuser, async (req, res) => {
         }
         const updatedNote = await Notes.findOne({ "_id": req.params.id, "user": req.user.id });
         res.json(updatedNote);
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
+// ROUTE 4 : deleting a note of a user DELETE : /notes/delete/:id ( Login Required )
+router.delete('/delete/:id', fetchuser, async (req, res) => {
+    try {
+
+        // Finding the note linked to the user with user id and note id and delete it
+        const deletedNote = await Notes.findOneAndDelete({ "_id": req.params.id, "user": req.user.id });
+        if (!deletedNote) {
+            return res.status(404).json({ "error": "Not Found" });
+        }
+        res.json({ Success: "Note deleted successfully", deletedNote: deletedNote });
 
     } catch (error) {
         res.status(500).json({ error: error.message });

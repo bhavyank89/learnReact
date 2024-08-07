@@ -48,4 +48,29 @@ router.post('/create', fetchuser, [
     }
 })
 
+// ROUTE 3 : updating a note of a user GET : /notes/update/:id ( Login Required )
+router.put('/update/:id', fetchuser, async (req, res) => {
+    try {
+
+        // Destructuring data to be updated from req body
+        const { title, description, tag } = req.body;
+        // Creating an object which contains data to be updated
+        const updateNote = {};
+        if (title) { updateNote.title = title };
+        if (description) { updateNote.description = description };
+        if (tag) { updateNote.tag = tag };
+
+        // Finding the note linked to the user with user id and note id and updating it
+        const findNote = await Notes.findOneAndUpdate({ "_id": req.params.id, "user": req.user.id }, updateNote);
+        if (!findNote) {
+            return res.status(404).json({ "error": "Not Found" });
+        }
+        const updatedNote = await Notes.findOne({ "_id": req.params.id, "user": req.user.id });
+        res.json(updatedNote);
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
 export default router;

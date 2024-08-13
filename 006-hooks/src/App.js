@@ -1,6 +1,7 @@
 import './App.css';
 // import { useState, useEffect, useRef, useContext, useReducer, useCallback, useMemo, useLayoutEffect, useDebugValue } from 'react';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import Navbar from './components/Navbar';
 
 /*
 - Hooks are functions that let you “hook into” React state and lifecycle features from function components. 
@@ -16,9 +17,10 @@ function App() {
   // Creating State
   // useState hook - To manage states. Returns a stateful value and an updater function to update it.
   const [count, setCount] = useState(0);
-  const handleCount = () => {
+  const handleCount = async () => {
     // Handling State
-    setCount(count + 1);
+    await setCount(count + 1);
+    updateAdjective();
   }
 
   // UseEffect hook - To manage side-effects like API calls, subscriptions, timers, mutations, and more.
@@ -79,6 +81,15 @@ function App() {
     return number.find(num => num.isMagical === true);
   }, [number]);
 
+  // useCallback Hook
+  // useCallback memoizes callback functions received as props, so they're not recreated on every re-render.
+  const [adjective, setAdjective] = useState("good " + count);
+
+  const updateAdjective = useCallback(() => {
+    const num = count + 1;
+    setAdjective("good " + num);
+  }, [count]);
+
   return (
     <div className="App">
       {/* useState and useEffect */}
@@ -98,6 +109,9 @@ function App() {
       <input ref={inputTwo} value={myNum} type="text" onChange={e => { }} /><br />
       <button onClick={handleInputOne}>inputOne</button>{" "}
       <button onClick={handleInputTwo}>inputTwo</button><br />
+
+      {/* Learn useCallback */}
+      <Navbar adjective={adjective} />
     </div>
   );
 }

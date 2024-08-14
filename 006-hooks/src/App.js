@@ -1,6 +1,6 @@
 import './App.css';
 // import { useState, useEffect, useRef, useContext, useReducer, useCallback, useMemo, useLayoutEffect, useDebugValue } from 'react';
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback, useReducer } from 'react';
 import Navbar from './components/Navbar';
 
 /*
@@ -90,6 +90,21 @@ function App() {
     setAdjective("good " + num);
   }, [count]);
 
+  // useReducer hook - used for complex state management
+  const reducer = (reducerCount, action) => {
+    // returns a newState
+    switch (action) {
+      case "Increment": return reducerCount + 1;
+      case "Decrement": return reducerCount - 1;
+      default: return reducerCount;
+    }
+  }
+
+  const [reducerCount, dispatch] = useReducer(reducer, 0);
+
+  const handleIncrement = () => { dispatch("Increment") };
+  const handleDecrement = () => { dispatch("Decrement") };
+
   return (
     <div className="App">
       {/* useState and useEffect */}
@@ -112,6 +127,11 @@ function App() {
 
       {/* Learn useCallback */}
       <Navbar adjective={adjective} />
+
+      {/* Learning useReducer hook */}
+      <button onClick={handleDecrement}>Decrement</button>{" "}
+      <span>{reducerCount}</span>{" "}
+      <button onClick={handleIncrement}>Increment</button>
     </div>
   );
 }

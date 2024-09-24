@@ -1,6 +1,6 @@
 import './App.css';
 // import { useState, useEffect, useRef, useContext, useReducer, useCallback, useMemo, useLayoutEffect, useDebugValue } from 'react';
-import { useState, useEffect, useRef, useMemo, useCallback, useReducer } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback, useReducer, useLayoutEffect } from 'react';
 import Navbar from './components/Navbar';
 
 /*
@@ -105,6 +105,31 @@ function App() {
   const handleIncrement = () => { dispatch("Increment") };
   const handleDecrement = () => { dispatch("Decrement") };
 
+  // Learning useEffect hook
+  /*
+    - It is same as useEffect hook in syntax
+    - only difference is that useEffect hook is asyncronous(runs after DOM is rendered) while useLayout hook is syncronous(runs before DOM is rendered)
+  */
+  const [styleSpan, setStyleSpan] = useState({ marginRight: "100px", display: "none", marginTop: "20px" });
+  const handleToggle = () => {
+    styleSpan.display === "inline" ? setStyleSpan({ marginRight: "100px", display: "none" }) : setStyleSpan({ marginRight: "100px", display: "inline" })
+  }
+  useLayoutEffect(() => {
+    const span2 = document.getElementById("span2");
+    if (span2.style.display === "inline") {
+      console.log("inside if of useLayoutEffect")
+      setStyleSpan(styleSpan.marginTop = "200px");
+    }
+  }, [styleSpan]);
+
+  useEffect(() => {
+    const span1 = document.getElementById("span1");
+    if (span1.style.display === "inline") {
+      console.log("inside if of useEffect")
+      setStyleSpan(styleSpan.marginTop = "200px");
+    }
+  }, [styleSpan]);
+
   return (
     <div className="App">
       {/* useState and useEffect */}
@@ -129,9 +154,16 @@ function App() {
       <Navbar adjective={adjective} />
 
       {/* Learning useReducer hook */}
+      <h1>Learning useReducer</h1>
       <button onClick={handleDecrement}>Decrement</button>{" "}
       <span>{reducerCount}</span>{" "}
       <button onClick={handleIncrement}>Increment</button>
+
+      {/* Learning useLayoutEffect */}
+      <h1>Learning useLayoutEffect</h1>
+      <button onClick={handleToggle}>Click Me</button><br /><br />
+      <span id="span1" style={styleSpan}>useEffect Hook</span>
+      <span id="span2" style={styleSpan}>useLayoutEffect</span><br /><br /><br /><br />
     </div>
   );
 }

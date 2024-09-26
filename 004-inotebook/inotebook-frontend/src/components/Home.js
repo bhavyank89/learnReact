@@ -4,7 +4,7 @@ import Notes from './Notes'
 const Home = () => {
 
     return (
-        <div className='container my-5 d-flex flex-row'>
+        <div className='container d-flex flex-row'>
 
             <div className="container mx-3">
                 <h2 style={{ color: "#B5C18E" }}>Enter Notes</h2>

@@ -23,6 +23,7 @@ function NoteContextProvider({ children }) {
             "__v": 0
         }
     ]
+
     const [notes, setNotes] = useState(notesFetched);
     return (
         <div>

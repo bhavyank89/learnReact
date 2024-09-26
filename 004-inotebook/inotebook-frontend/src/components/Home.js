@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
-import NoteContext from '../context/NoteContext'
+import React from 'react'
+import Notes from './Notes'
 
 const Home = () => {
-    const { notes } = useContext(NoteContext);
+
     return (
         <div className='container my-5 d-flex flex-row'>
 
             <div className="container mx-3">
-                <h2>Enter Notes</h2>
+                <h2 style={{ color: "#B5C18E" }}>Enter Notes</h2>
                 <form>
                     <div className="mb-3">
                         <div>
@@ -23,14 +23,11 @@ const Home = () => {
                             <input type="text" className="form-control bg-dark" data-bs-theme="dark" id="exampleInputPassword1" />
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary mb-2 my-3">Submit</button>
+                    <button type="submit" className="btn btn-primary mb-2 my-3">Add Note</button>
                 </form>
             </div>
 
-            <div className="container mx-3">
-                <h2>Your Notes</h2>
-                {notes.map((note) => { return <><h6>{note.title}</h6><br /></> })}
-            </div>
+            <Notes />
         </div>
     )
 }

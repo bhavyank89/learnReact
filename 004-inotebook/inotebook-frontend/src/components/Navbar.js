@@ -1,7 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
+
+    // provides the corrent location details of the web page
+    let location = useLocation();
+    let locationPath = location.pathname;
+
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-dark sticky-top border-body" data-bs-theme="dark">
@@ -13,9 +18,9 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                                <Link className={`nav-link ${(locationPath === '/') ? "active" : ""}`} aria-current="page" to="/">Home</Link>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-link ${(locationPath === '/about') ? "active" : ""}`}>
                                 <Link className="nav-link" to="/about">About</Link>
                             </li>
                         </ul>

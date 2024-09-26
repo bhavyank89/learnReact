@@ -4,7 +4,7 @@ import NoteContext from '../context/NoteContext'
 function NoteContextProvider({ children }) {
     return (
         <div>
-            <NoteContext.Provider >
+            <NoteContext.Provider value={{}} >
                 {children}
             </NoteContext.Provider>
         </div>

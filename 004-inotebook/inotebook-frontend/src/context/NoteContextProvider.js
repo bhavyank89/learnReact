@@ -36,9 +36,17 @@ function NoteContextProvider({ children }) {
 
         setNotes(notes.concat(createdNote));
     }
+
+    // deleteNote
+    const deleteNote = (id) => {
+        console.log("deleting note with id " + id);
+        const filteredNotes = notes.filter((note) => { return note._id !== id });
+        setNotes(filteredNotes);
+    }
+
     return (
         <div>
-            <NoteContext.Provider value={{ notes, addNote }} >
+            <NoteContext.Provider value={{ notes, addNote, deleteNote }} >
                 {children}
             </NoteContext.Provider>
         </div>

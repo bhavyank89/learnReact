@@ -25,9 +25,20 @@ function NoteContextProvider({ children }) {
     ]
 
     const [notes, setNotes] = useState(notesFetched);
+
+    // addNote
+    const addNote = (note) => {
+        const title = note.title;
+        const description = note.description;
+        const tag = (!note.tag) ? "default" : note.tag;
+
+        const createdNote = { title, description, tag };
+
+        setNotes(notes.concat(createdNote));
+    }
     return (
         <div>
-            <NoteContext.Provider value={{ notes, setNotes }} >
+            <NoteContext.Provider value={{ notes, addNote }} >
                 {children}
             </NoteContext.Provider>
         </div>

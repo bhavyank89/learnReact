@@ -8,7 +8,7 @@ function Alert(props) {
     return (
         <>
             <div style={style} className="container flex-row-reverse d-flex">
-                <div class="alert alert-warning text-dark" role="alert">
+                <div className="alert alert-warning text-dark" role="alert">
                     {props.message}
                 </div>
             </div>

@@ -13,6 +13,7 @@ function AddNote() {
     const handleOnClick = (e) => {
         e.preventDefault();
         addNote(note);
+        setNote({ title: "", description: "", tag: "" });
     }
 
     return (
@@ -32,6 +33,7 @@ function AddNote() {
                                 className="form-control bg-dark"
                                 data-bs-theme="dark"
                                 name='title' id="title"
+                                value={note.title}
                                 onChange={handleOnChange} />
                         </div>
                         <div className="form-group">
@@ -46,6 +48,7 @@ function AddNote() {
                                 name='description'
                                 id="description"
                                 rows="3"
+                                value={note.description}
                                 onChange={handleOnChange}></textarea >
                         </div>
                         <div>
@@ -61,6 +64,7 @@ function AddNote() {
                                 id="tag"
                                 name='tag'
                                 placeholder='default'
+                                value={note.tag}
                                 onChange={handleOnChange} />
                         </div>
                     </div>

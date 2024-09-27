@@ -77,7 +77,7 @@ function NoteContextProvider({ children }) {
     // updateNote
     const updateNote = async (uNote) => {
         const url = `${host}/notes/update/${uNote.id}`;
-        const response = await fetch(url, {
+        await fetch(url, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

@@ -52,10 +52,26 @@ function NoteContextProvider({ children }) {
 
 
     // deleteNote
-    const deleteNote = (id) => {
-        console.log("deleting note with id " + id);
-        const filteredNotes = notes.filter((note) => { return note._id !== id });
-        setNotes(filteredNotes);
+    const deleteNote = async (id) => {
+
+        const url = `${host}/notes/delete/${id}`;
+
+        try {
+            const result = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
+                }
+            })
+
+            const deletedNote = await result.json();
+            const filteredNote = notes.filter((note) => { return note._id !== deletedNote._id });
+            setNotes(filteredNote);
+
+        } catch (error) {
+            console.log("Error : " + error.message);
+        }
     }
 
     return (

@@ -15,7 +15,7 @@ function Notes() {
         <>
             <div className="container">
                 <h2 style={{ color: "#B5C18E" }}>Your Notes</h2>
-                {(!notes) ? <p>Add Some Notes</p> : (notes.map((note) => { return <Note key={note._id} note={note} /> }))}
+                {(!notes || notes.length === 0) ? <p>Add Some Notes</p> : (notes.map((note) => { return <Note key={note._id} note={note} /> }))}
             </div>
         </>
     )

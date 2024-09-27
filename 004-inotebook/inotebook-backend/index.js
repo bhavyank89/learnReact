@@ -1,10 +1,13 @@
 import connectToMongo from './db.js';
 import express from 'express';
+import cors from 'cors';
 
 connectToMongo();
 
 const app = express();
 const port = 5000;
+app.use(cors());
+// cors is a package used to make fetch request to a url using browser
 
 app.listen(port, () => { console.log(`Listening at http://localhost:${port}`) });
 app.use(express.json());

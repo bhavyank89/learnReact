@@ -22,14 +22,32 @@ function NoteContextProvider({ children }) {
     }
 
     // addNote
-    const addNote = (note) => {
-        const title = note.title;
-        const description = note.description;
-        const tag = (!note.tag) ? "default" : note.tag;
+    const addNote = async (note) => {
+        const { title, description } = note;
+        const tag = note.tag || "default"; // Default tag if not provided
 
         const createdNote = { title, description, tag };
 
-        setNotes(notes.concat(createdNote));
+        const url = `${host}/notes/create`;
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
+                },
+                body: JSON.stringify(createdNote)
+            });
+
+            const addedNote = await response.json(); // Get the added note from the response
+
+            // Update the state with the new note
+            setNotes([...notes, addedNote]);
+
+        } catch (error) {
+            console.log("Error:", error.message);
+        }
     }
 
 

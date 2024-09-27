@@ -2,29 +2,24 @@ import React, { useState } from 'react'
 import NoteContext from '../context/NoteContext'
 
 function NoteContextProvider({ children }) {
-    // hardCoded note Fetched
-    const notesFetched = [
-        {
-            "_id": "66f510e0cc1a4e316299a29a",
-            "user": "66b0d3c214573765b177ef6f",
-            "title": "My Title1",
-            "description": "First Note of the day",
-            "tag": "General",
-            "timeStamp": "2024-09-26T07:44:32.320Z",
-            "__v": 0
-        },
-        {
-            "_id": "66f510efcc1a4e316299a29c",
-            "user": "66b0d3c214573765b177ef6f",
-            "title": "My Title2",
-            "description": "Second Note of the day",
-            "tag": "Developmnet",
-            "timeStamp": "2024-09-26T07:44:47.962Z",
-            "__v": 0
-        }
-    ]
 
-    const [notes, setNotes] = useState(notesFetched);
+    const [notes, setNotes] = useState();
+
+    const host = "http://localhost:5000";
+
+    // getAllNotes
+    const getAllNotes = async () => {
+        const url = `${host}/notes/fetchall`;
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0",
+            },
+        })
+        const fetchedNotes = await response.json();
+        setNotes(fetchedNotes);
+    }
 
     // addNote
     const addNote = (note) => {
@@ -37,6 +32,7 @@ function NoteContextProvider({ children }) {
         setNotes(notes.concat(createdNote));
     }
 
+
     // deleteNote
     const deleteNote = (id) => {
         console.log("deleting note with id " + id);
@@ -46,7 +42,7 @@ function NoteContextProvider({ children }) {
 
     return (
         <div>
-            <NoteContext.Provider value={{ notes, addNote, deleteNote }} >
+            <NoteContext.Provider value={{ notes, getAllNotes, addNote, deleteNote }} >
                 {children}
             </NoteContext.Provider>
         </div>

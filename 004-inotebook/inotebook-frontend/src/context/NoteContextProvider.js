@@ -74,10 +74,22 @@ function NoteContextProvider({ children }) {
             console.log("Error : " + error.message);
         }
     }
-
+    // updateNote
+    const updateNote = async (uNote) => {
+        const url = `${host}/notes/update/${uNote.id}`;
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
+            },
+            body: JSON.stringify(uNote)
+        })
+        getAllNotes();
+    }
     return (
         <div>
-            <NoteContext.Provider value={{ notes, getAllNotes, addNote, deleteNote }} >
+            <NoteContext.Provider value={{ notes, getAllNotes, addNote, deleteNote, updateNote }} >
                 {children}
             </NoteContext.Provider>
         </div>

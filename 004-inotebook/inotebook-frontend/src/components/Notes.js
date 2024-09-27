@@ -9,7 +9,7 @@ function Notes() {
     useEffect(() => {
         getAllNotes()
         // eslint-disable-next-line
-    }, [notes]);
+    }, []);
 
     return (
         <>

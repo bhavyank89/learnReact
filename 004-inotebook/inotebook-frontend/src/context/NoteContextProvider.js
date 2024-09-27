@@ -68,6 +68,7 @@ function NoteContextProvider({ children }) {
             const deletedNote = await result.json();
             const filteredNote = notes.filter((note) => { return note._id !== deletedNote._id });
             setNotes(filteredNote);
+            getAllNotes();
 
         } catch (error) {
             console.log("Error : " + error.message);

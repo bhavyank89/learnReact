@@ -47,7 +47,7 @@ function AddNote() {
                                 data-bs-theme="dark"
                                 name='description'
                                 id="description"
-                                rows="3"
+                                rows="6"
                                 value={note.description}
                                 onChange={handleOnChange}></textarea >
                         </div>

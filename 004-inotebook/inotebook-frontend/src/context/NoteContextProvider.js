@@ -18,7 +18,8 @@ function NoteContextProvider({ children }) {
             },
         })
         const fetchedNotes = await response.json();
-        setNotes(fetchedNotes);
+        const reversedFetchedNotes = fetchedNotes.reverse();
+        setNotes(reversedFetchedNotes);
     }
 
     // addNote
@@ -44,6 +45,7 @@ function NoteContextProvider({ children }) {
 
             // Update the state with the new note
             setNotes([...notes, addedNote]);
+            getAllNotes();
 
         } catch (error) {
             console.log("Error:", error.message);

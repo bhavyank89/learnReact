@@ -75,15 +75,15 @@ function NoteContextProvider({ children }) {
         }
     }
     // updateNote
-    const updateNote = async (uNote) => {
-        const url = `${host}/notes/update/${uNote.id}`;
+    const updateNote = async (note) => {
+        const url = `${host}/notes/update/${note.id}`;
         await fetch(url, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
             },
-            body: JSON.stringify(uNote)
+            body: JSON.stringify(note)
         })
         getAllNotes();
     }

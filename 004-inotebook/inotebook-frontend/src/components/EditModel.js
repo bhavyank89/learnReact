@@ -29,6 +29,7 @@ function EditModel(props) {
         e.preventDefault();
         const note = { title, description, tag, id };
         updateNote(note);
+        props.showAlertTab(true, "Note Updated");
         // Perform the update logic here if needed, then close the modal
         setShowModal(false);
     };

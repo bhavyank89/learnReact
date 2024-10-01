@@ -21,6 +21,7 @@ function Note(props) {
 
     const handleDelete = () => {
         deleteNote(id);
+        props.showAlertTab(true, "Note Deleted");
     }
 
     const handleUpdate = () => {
@@ -56,7 +57,7 @@ function Note(props) {
                 {/* <!-- Modal --> */}
                 <div>
                     {showModal && (
-                        <EditModel title={title} tag={tag} description={description} id={id} setShowModal={setShowModal} />
+                        <EditModel title={title} tag={tag} description={description} id={id} setShowModal={setShowModal} showAlertTab={props.showAlertTab} />
                     )}
                 </div>
             </div>

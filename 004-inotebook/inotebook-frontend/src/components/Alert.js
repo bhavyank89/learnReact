@@ -1,15 +1,11 @@
 import React from 'react'
 
 function Alert(props) {
-    const style = {
-        marginTop: "10px",
-        marginRight: "0px",
-    }
     return (
         <>
-            <div style={style} className="container flex-row-reverse d-flex">
+            <div className="container flex-row-reverse d-flex">
                 <div className="alert alert-warning text-dark" role="alert">
-                    {props.message}
+                    {props.alertMessage}
                 </div>
             </div>
         </>

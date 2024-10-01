@@ -69,7 +69,7 @@ function AddNote(props) {
                                 onChange={handleOnChange} />
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary mb-2 my-3" onClick={handleOnClick}>Add Note</button>
+                    <button disabled={note.title.length < 5 || note.description.length < 5} type="submit" className={`btn btn-${(note.title.length < 5 || note.description.length < 5) ? "secondary" : "primary"} mb-2 my-3`} style={{ cursor: "pointer" }} onClick={handleOnClick}>Add Note</button>
                 </form>
             </div>
         </>

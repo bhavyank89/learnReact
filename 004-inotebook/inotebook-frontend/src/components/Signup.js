@@ -94,7 +94,7 @@ function Signup(props) {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary my-3">SignUp</button>
+                    <button type="submit" disabled={credentials.password.length < 5} className={`btn btn-${(credentials.password.length < 5) ? "secondary" : "primary"} my-3`}>SignUp</button>
                 </form>
             </div>
             <div className='mx-5'>

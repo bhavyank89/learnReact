@@ -62,9 +62,10 @@ router.post('/login', [
 ], async (req, res) => {
 
     // Check for error in validation
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({success,errors: errors.array() });
     }
 
     try {
@@ -73,14 +74,14 @@ router.post('/login', [
         const user = await User.findOne({ email });
         if (!user) {
             // if user email does not exists
-            return res.status(400).json({ error: "Please login with correct credential" });
+            return res.status(400).json({success, error: "Please login with correct credential" });
         }
 
         // check if password is correct
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
             // if password does not match
-            return res.status(400).json({ error: "Please login with correct credential" });
+            return res.status(400).json({success, error: "Please login with correct credential" });
         }
 
         // return a token if password matches
@@ -92,12 +93,13 @@ router.post('/login', [
         }
         const JWT_Signature = "inotebookisagre@t"
         const JWTToken = jwt.sign(userId, JWT_Signature);
+        success = true;
 
         // sending JWT Token
-        res.json({ JWTToken });
+        res.json({success, JWTToken });
 
     } catch (e) {
-        res.status(500).send({ error: e.message });
+        res.status(500).send({success, error: e.message });
     }
 
 })

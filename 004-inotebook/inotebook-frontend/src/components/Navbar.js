@@ -9,13 +9,11 @@ const Navbar = (props) => {
     const handleLoginClick = () => {
         props.setShowSignup(true);
         props.setShowLogin(false);
-        props.setShowLogout(false);
     };
 
     const handleSignupClick = () => {
         props.setShowSignup(false);
         props.setShowLogin(true);
-        props.setShowLogout(false);
     };
 
     const handleLogoutClick = () => {
@@ -23,7 +21,14 @@ const Navbar = (props) => {
         props.setShowLogin(false);
         localStorage.removeItem('auth-token');
     };
-
+    const handleAboutClick = () => {
+        props.setShowSignup(true);
+        props.setShowLogin(true);
+    }
+    const handleHomeClcik = () => {
+        props.setShowSignup(true);
+        props.setShowLogin(false);
+    }
     return (
         <nav className="navbar navbar-expand-lg bg-dark sticky-top border-body" data-bs-theme="dark">
             <div className="container-fluid">
@@ -34,10 +39,10 @@ const Navbar = (props) => {
                 {!localStorage.getItem('auth-token') ? (<div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className={`nav-link ${(locationPath === '/') ? "active" : ""}`} aria-current="page" to="/">Home</Link>
+                            <Link onClick={handleHomeClcik} className={`nav-link ${(locationPath === '/') ? "active" : ""}`} aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${(locationPath === '/about') ? "active" : ""}`} to="/about">About</Link>
+                            <Link onClick={handleAboutClick} className={`nav-link ${(locationPath === '/about') ? "active" : ""}`} to="/about">about inotebook</Link>
                         </li>
                     </ul>
                     {props.showLogin && (

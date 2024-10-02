@@ -13,9 +13,8 @@ function App() {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [showLogin, setShowLogin] = useState(true);
-  const [showSignup, setShowSignup] = useState(false);
-  const [showLogout, setShowLogout] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(true);
 
   const showAlertTab = (show, message) => {
     setShowAlert(show);
@@ -37,8 +36,6 @@ function App() {
               showSignup={showSignup}
               setShowLogin={setShowLogin}
               setShowSignup={setShowSignup}
-              showLogout={showLogout}
-              setShowLogout={setShowLogout}
             />
             <div className='container' style={{ marginTop: "10px" }}>
               {showAlert && <Alert alertMessage={alertMessage} />}

@@ -14,7 +14,7 @@ function NoteContextProvider({ children }) {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0",
+                "auth-token": localStorage.getItem('auth-token'),
             },
         })
         const fetchedNotes = await response.json();
@@ -36,7 +36,7 @@ function NoteContextProvider({ children }) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
+                    "auth-token": localStorage.getItem('auth-token')
                 },
                 body: JSON.stringify(createdNote)
             });
@@ -63,7 +63,7 @@ function NoteContextProvider({ children }) {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
+                    "auth-token": localStorage.getItem('auth-token')
                 }
             })
 
@@ -83,7 +83,7 @@ function NoteContextProvider({ children }) {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiMGQzYzIxNDU3Mzc2NWIxNzdlZjZmIn0sImlhdCI6MTcyMjg2NDU3OH0.p9DpBqzvNAKquLLkw8-YTN5f_ICX8LMXbQ0v2kRJ1x0"
+                "auth-token": localStorage.getItem('auth-token')
             },
             body: JSON.stringify(note)
         })

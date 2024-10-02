@@ -5,7 +5,7 @@ import AddNote from './AddNote'
 const Home = (props) => {
 
     return (
-        <div style={{ marginTop: "50px" }} className='container d-flex flex-row'>
+        <div style={{ marginTop: "50px",marginBottom:"100px" }} className='container d-flex flex-row'>
             <AddNote showAlertTab={props.showAlertTab} />
             <Notes showAlertTab={props.showAlertTab} />
         </div>

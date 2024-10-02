@@ -8,6 +8,7 @@ import Alert from './components/Alert';
 import { useState } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route path='/login' element={<Login showAlertTab={showAlertTab} />} />
             <Route path='/signup' element={<Signup showAlertTab={showAlertTab} />} />
           </Routes>
+          <Footer />
         </Router>
       </NoteContextProvider>
     </div>

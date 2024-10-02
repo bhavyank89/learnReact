@@ -39,7 +39,7 @@ function Login(props) {
 
     return (
         <div className='container d-flex'>
-            <div style={{ width: "500px", marginTop: "50px" }} className="mx-5">
+            <div style={{ width: "500px", marginTop: "50px",marginBottom:"100px" }} className="mx-5">
                 <h2 style={{ color: "#B5C18E" }}>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3 my-5">

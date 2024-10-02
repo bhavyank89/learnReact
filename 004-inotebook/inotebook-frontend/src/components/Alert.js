@@ -3,10 +3,10 @@ import React from 'react'
 function Alert(props) {
     return (
         <>
-            <div className="container flex-row-reverse d-flex">
-                <div className="alert alert-primary text-dark" role="alert">
+            <div style={{ top: "80px", right: "15px", display: "inline-block" }} className="position-fixed">
+                <span className="alert alert-primary text-dark" role="alert">
                     {props.alertMessage}
-                </div>
+                </span>
             </div>
         </>
     )

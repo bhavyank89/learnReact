@@ -38,9 +38,8 @@ function App() {
               setShowLogin={setShowLogin}
               setShowSignup={setShowSignup}
             />
-            <div className='container' style={{ marginTop: "10px" }}>
-              {showAlert && <Alert alertMessage={alertMessage} />}
-            </div>
+            {showAlert && <Alert alertMessage={alertMessage} />}
+
           </div>
           <Routes>
             <Route path='/' element={<Home showAlertTab={showAlertTab} />} />

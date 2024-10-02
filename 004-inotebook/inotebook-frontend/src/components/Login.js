@@ -10,7 +10,6 @@ function Login(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Use credentials for login logic
-        console.log(credentials); // For debugging purposes
 
         const host = "http://localhost:5000";
         const response = await fetch(`${host}/auth/login`,
@@ -22,7 +21,6 @@ function Login(props) {
                 body: JSON.stringify(credentials)
             })
         const json = await response.json();
-        console.log(json);
 
         if (json.success) {
             props.showAlertTab(true, "Logged in successfully!");

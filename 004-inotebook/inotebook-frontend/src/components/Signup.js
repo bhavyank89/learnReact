@@ -20,7 +20,6 @@ function Signup(props) {
             });
 
             const json = await response.json();
-            console.log(json);
 
             // Success case
             if (json.success) {

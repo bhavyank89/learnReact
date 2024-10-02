@@ -6,37 +6,54 @@ import Navbar from './components/Navbar';
 import NoteContextProvider from './context/NoteContextProvider';
 import Alert from './components/Alert';
 import { useState } from 'react';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 function App() {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [showLogin, setShowLogin] = useState(true);
+  const [showSignup, setShowSignup] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
 
   const showAlertTab = (show, message) => {
     setShowAlert(show);
     setAlertMessage(message);
     setTimeout(() => {
-      setShowAlert(false)
+      setShowAlert(false);
       setAlertMessage("");
     }, 2000);
-  }
+  };
 
   return (
     <div>
       <NoteContextProvider>
         <Router>
           <div className='sticky-top'>
-            <Navbar />
-            <div className='container sticky-top' style={{ marginTop: "10px", marginRight: "0px", height: "15px", padding: "0px" }}>{showAlert && <Alert alertMessage={alertMessage} />}</div>
+            {/* Pass props to Navbar */}
+            <Navbar
+              showLogin={showLogin}
+              showSignup={showSignup}
+              setShowLogin={setShowLogin}
+              setShowSignup={setShowSignup}
+              showLogout={showLogout}
+              setShowLogout={setShowLogout}
+            />
+            <div className='container' style={{ marginTop: "10px" }}>
+              {showAlert && <Alert alertMessage={alertMessage} />}
+            </div>
           </div>
           <Routes>
             <Route path='/' element={<Home showAlertTab={showAlertTab} />} />
             <Route path='/about' element={<About />} />
+            <Route path='/login' element={<Login showAlertTab={showAlertTab} />} />
+            <Route path='/signup' element={<Signup showAlertTab={showAlertTab} />} />
           </Routes>
         </Router>
       </NoteContextProvider>
     </div>
-  )
+  );
 }
 
 export default App;

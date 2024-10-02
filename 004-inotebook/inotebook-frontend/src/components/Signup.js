@@ -25,7 +25,7 @@ function Signup(props) {
             if (json.success) {
                 props.showAlertTab(true, "Account created successfully!");
                 localStorage.setItem('auth-token', json.JWTToken);
-                navigate("/");
+                navigate("/login");
             }
             // Error handling: duplicate user case
             else if (json.error && json.error.includes("duplicate key error")) {

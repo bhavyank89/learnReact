@@ -54,6 +54,7 @@ function Login(props) {
                             className="form-control bg-dark"
                             id="email"
                             onChange={handleOnChange}
+                            required
                         />
                     </div>
                     <div className="mb-5">
@@ -66,9 +67,10 @@ function Login(props) {
                             className="form-control bg-dark"
                             id="password"
                             onChange={handleOnChange}
+                            required
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary my-3">Login</button>
+                    <button type="submit" disabled={credentials.password.length < 5} className={`btn btn-${(credentials.password.length < 5) ? "secondary" : "primary"} my-3`}>Login</button>
                 </form>
             </div>
             <div className='mx-5'>
